@@ -1,5 +1,6 @@
 package edu.smith.cs.csc212.p6;
 
+import edu.smith.cs.csc212.p6.errors.EmptyListError;
 import edu.smith.cs.csc212.p6.errors.P6NotImplemented;
 
 public class GrowableList<T> implements P6List<T> {
@@ -14,12 +15,18 @@ public class GrowableList<T> implements P6List<T> {
 
 	@Override
 	public T removeFront() {
-		throw new P6NotImplemented();
+		return removeIndex(0);
 	}
 
 	@Override
 	public T removeBack() {
-		throw new P6NotImplemented();
+		if (this.size() == 0) {
+			throw new EmptyListError();
+		}
+		T value = this.getIndex(fill -1);
+		fill --;
+		this.array[fill] = null;
+		return value;
 	}
 
 	@Override
